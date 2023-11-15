@@ -1,0 +1,11 @@
+package main
+import "fmt"
+import "strconv"
+import "encoding/json"
+
+var fib[10]int64
+
+func fibs() [10]int64{
+
+    return fib
+}

@@ -1,0 +1,7 @@
+package main // making package for standalone executable
+import "fmt" // importing a package   
+
+func main() { // making an entry point 
+    // printing using fmt functionality
+    fmt.Println("Hello World")
+} // exiting the program

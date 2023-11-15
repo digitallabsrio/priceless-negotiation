@@ -1,0 +1,17 @@
+package main
+import "fmt"
+import "strconv"
+import "encoding/json"
+
+type flt func(int) bool // aliasing type
+
+
+func isEven(n int) bool { // check if n is even or not
+    
+    return true
+}
+
+func filter(sl[] int, f flt)(yes, no[] int) { // split s into two slices: even and odd
+    
+    return 
+}

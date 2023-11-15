@@ -1,0 +1,9 @@
+package main
+
+// make struct here
+
+
+
+func main(){
+  // create struct using struct literal and print its field using fmt package
+}

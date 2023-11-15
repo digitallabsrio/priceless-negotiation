@@ -1,0 +1,9 @@
+package main
+import (
+    "fmt"
+    "runtime"
+)
+func main() {
+    // Printing Version number of Go on your machine
+    fmt.Printf("%s", runtime.Version())
+}

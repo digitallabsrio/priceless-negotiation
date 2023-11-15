@@ -1,0 +1,10 @@
+package main
+import "fmt"
+import "strings"
+import "unicode"
+
+func main(){
+  s := "Hello! Let's run Go lang"
+  //finding index of first space from s string
+  fmt.Print(strings.IndexFunc(s, unicode.IsSpace))
+}

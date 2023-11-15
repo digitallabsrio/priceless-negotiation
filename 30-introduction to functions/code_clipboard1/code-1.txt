@@ -1,0 +1,17 @@
+package main
+import "fmt"
+
+func main() {
+    lastName := "John"
+    fmt.Println("In main before calling greeting")
+    greeting(lastName) // greeting function invoked
+    fmt.Println("In main after calling greeting")
+    fmt.Println("variable lastName is still: ", lastName)
+}
+
+// greeting function declared
+func greeting(name string) {
+    fmt.Println("In greeting: Hi!!!!!", name)
+    name = "Johnny"
+    fmt.Println("In greeting: Hi!!!!!", name)
+}

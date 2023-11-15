@@ -1,0 +1,11 @@
+package main
+import "fmt"
+import "strconv"
+import "encoding/json"
+
+var Days = map[int]string{} // do initialization here
+
+func findDay(n int) string {
+	
+	return ""
+}

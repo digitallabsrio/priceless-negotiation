@@ -1,0 +1,37 @@
+package main
+
+type Simpler interface { 
+	
+}
+
+type Simple struct {
+	
+}
+
+func (p *Simple) Get() int {  
+	return 0
+}
+
+func (p *Simple) Set(u int) {
+	
+}
+
+type RSimple struct {
+	
+}
+
+func (p *RSimple) Get() int {
+	return 0
+}
+
+func (p *RSimple) Set(u int) {
+	
+}
+
+func fI(it Simpler) int { 
+	return 0
+}
+
+func main() {
+	  
+}

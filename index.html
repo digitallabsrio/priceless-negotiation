@@ -1,0 +1,4166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+    :root {
+      --docsifytabs-border-color: #ededed;
+      --docsifytabs-border-px: 1px;
+      --docsifytabs-border-radius-px: ;
+      --docsifytabs-margin: 1.5em 0;
+      --docsifytabs-tab-background: #f8f8f8;
+      --docsifytabs-tab-background--active: var(--docsifytabs-content-background);
+      --docsifytabs-tab-color: #999;
+      --docsifytabs-tab-color--active: inherit;
+      --docsifytabs-tab-highlight-px: 3px;
+      --docsifytabs-tab-highlight-color: var(--theme-color, currentColor);
+      --docsifytabs-tab-padding: 0.6em 1em;
+      --docsifytabs-content-background: inherit;
+      --docsifytabs-content-padding: 1.5rem
+    }
+
+    .docsify-tabs:before,
+    .docsify-tabs__tab {
+      z-index: 1
+    }
+
+    .docsify-tabs__tab--active,
+    .docsify-tabs__tab:focus {
+      z-index: 2
+    }
+
+    .docsify-tabs {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      position: relative
+    }
+
+    .docsify-tabs:before {
+      -ms-flex-order: 0;
+      content: "";
+      -ms-flex: 1 1;
+      flex: 1 1;
+      order: 0
+    }
+
+    .docsify-tabs__tab {
+      -ms-flex-order: -1;
+      appearance: none;
+      font-size: inherit;
+      margin: 0;
+      order: -1;
+      position: relative
+    }
+
+    .docsify-tabs__content[class] {
+      height: 0;
+      overflow: hidden;
+      position: absolute;
+      visibility: hidden;
+      width: 100%
+    }
+
+    .docsify-tabs__content[class]>:first-child {
+      margin-top: 0
+    }
+
+    .docsify-tabs__content[class]>:last-child {
+      margin-bottom: 0
+    }
+
+    .docsify-tabs__tab--active+.docsify-tabs__content[class] {
+      height: auto;
+      overflow: auto;
+      position: relative;
+      visibility: visible
+    }
+
+    [class*=docsify-tabs--] {
+      margin: 1.5em 0;
+      margin: var(--docsifytabs-margin)
+    }
+
+    [class*=docsify-tabs--]>.docsify-tabs__tab {
+      background: #f8f8f8;
+      background: var(--docsifytabs-tab-background);
+      color: #999;
+      color: var(--docsifytabs-tab-color);
+      padding: .6em 1em;
+      padding: var(--docsifytabs-tab-padding)
+    }
+
+    [class*=docsify-tabs--]>.docsify-tabs__tab--active {
+      background: inherit;
+      background: var(--docsifytabs-tab-background--active);
+      color: inherit;
+      color: var(--docsifytabs-tab-color--active)
+    }
+
+    [class*=docsify-tabs--]>.docsify-tabs__content {
+      background: inherit;
+      background: var(--docsifytabs-content-background)
+    }
+
+    [class*=docsify-tabs--]>.docsify-tabs__tab--active+.docsify-tabs__content {
+      padding: 1.5rem;
+      padding: var(--docsifytabs-content-padding)
+    }
+
+    .docsify-tabs--classic:before,
+    .docsify-tabs--classic>.docsify-tabs__content,
+    .docsify-tabs--classic>.docsify-tabs__tab {
+      border-color: #ededed;
+      border-color: var(--docsifytabs-border-color);
+      border-style: solid;
+      border-width: 1px;
+      border-width: var(--docsifytabs-border-px)
+    }
+
+    .docsify-tabs--classic:before {
+      border-left-width: 0;
+      border-right-width: 0;
+      border-top-width: 0;
+      margin-right: 1px;
+      margin-right: var(--docsifytabs-border-px)
+    }
+
+    .docsify-tabs--classic>.docsify-tabs__tab:first-of-type {
+      border-top-left-radius: var(--docsifytabs-border-radius-px)
+    }
+
+    .docsify-tabs--classic>.docsify-tabs__tab:last-of-type {
+      border-top-right-radius: var(--docsifytabs-border-radius-px)
+    }
+
+    .docsify-tabs--classic>.docsify-tabs__tab~.docsify-tabs__tab {
+      margin-left: -1px;
+      margin-left: calc(0px - var(--docsifytabs-border-px))
+    }
+
+    .docsify-tabs--classic>.docsify-tabs__tab--active {
+      border-bottom-width: 0;
+      box-shadow: inset 0 3px 0 0 currentColor;
+      box-shadow: inset 0 var(--docsifytabs-tab-highlight-px) 0 0 var(--docsifytabs-tab-highlight-color)
+    }
+
+    .docsify-tabs--classic>.docsify-tabs__content {
+      border-radius: 0;
+      border-radius: 0 var(--docsifytabs-border-radius-px) var(--docsifytabs-border-radius-px) var(--docsifytabs-border-radius-px);
+      border-top: 0;
+      margin-top: -1px;
+      margin-top: calc(0px - var(--docsifytabs-border-px))
+    }
+
+    .docsify-tabs--material>.docsify-tabs__tab {
+      background: transparent;
+      border: 0;
+      margin-bottom: 2px;
+      margin-bottom: calc(var(--docsifytabs-tab-highlight-px) - var(--docsifytabs-border-px))
+    }
+
+    .docsify-tabs--material>.docsify-tabs__tab--active {
+      background: transparent;
+      box-shadow: 0 3px 0 0 currentColor;
+      box-shadow: 0 var(--docsifytabs-tab-highlight-px) 0 0 var(--docsifytabs-tab-highlight-color)
+    }
+
+    .docsify-tabs--material>.docsify-tabs__content {
+      border-color: #ededed;
+      border-color: var(--docsifytabs-border-color);
+      border-style: solid;
+      border-width: 1px 0;
+      border-width: var(--docsifytabs-border-px) 0
+    }
+  </style>
+  <!-- UPDATE: Add description, author, og:site_name, og:title, and og:description text for your course. -->
+  <!-- NOTE: Text presented in ALL_CAPS indicate values you should replace. -->
+  <title>Project</title>
+  <link rel="stylesheet" href="/priceless-negotiation/static/vue.css">
+  <link rel="stylesheet" href="/priceless-negotiation/static/style.min.css" title="docsify-darklight-theme" type="text/css">
+  <style type="text/css">
+    .docsify-copy-code-button,
+    .docsify-copy-code-button span {
+      cursor: pointer;
+      transition: all .25s ease
+    }
+
+    .docsify-copy-code-button {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      overflow: visible;
+      padding: .65em .8em;
+      border: 0;
+      border-radius: 0;
+      outline: 0;
+      font-size: 1em;
+      background: grey;
+      background: var(--theme-color, grey);
+      color: #fff;
+      opacity: 0
+    }
+
+    .docsify-copy-code-button span {
+      border-radius: 3px;
+      background: inherit;
+      pointer-events: none
+    }
+
+    .docsify-copy-code-button .error,
+    .docsify-copy-code-button .success {
+      position: absolute;
+      z-index: -100;
+      top: 50%;
+      right: 0;
+      padding: .5em .65em;
+      font-size: .825em;
+      opacity: 0;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%)
+    }
+
+    .docsify-copy-code-button.error .error,
+    .docsify-copy-code-button.success .success {
+      right: 100%;
+      opacity: 1;
+      -webkit-transform: translate(-115%, -50%);
+      transform: translate(-115%, -50%)
+    }
+
+    .docsify-copy-code-button:focus,
+    pre:hover .docsify-copy-code-button {
+      opacity: 1
+    }
+  </style>
+  <style type="text/css">
+    .alert {
+      word-wrap: break-word;
+      display: block;
+      margin-bottom: 1rem !important;
+      padding: .75rem 1.25rem !important;
+      position: relative;
+      word-break: break-word
+    }
+
+    .alert>* {
+      max-width: 100%
+    }
+
+    .alert>:first-child {
+      margin-top: 0
+    }
+
+    .alert>:last-child {
+      margin-bottom: 0
+    }
+
+    .alert:before {
+      content: unset !important
+    }
+
+    .alert+.alert {
+      margin-top: -.25rem !important
+    }
+
+    .alert p {
+      margin-bottom: .5rem;
+      margin-top: .5rem
+    }
+
+    .alert .title {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      font-weight: 600;
+      margin: 0
+    }
+
+    .icon {
+      background-repeat: no-repeat;
+      display: inline-block;
+      height: 16px;
+      margin-right: .5rem;
+      width: 16px
+    }
+
+    .alert.callout {
+      background: var(--background);
+      border: 1px solid #eee;
+      border-left-width: .25rem;
+      border-radius: .25rem
+    }
+
+    .alert.callout.note {
+      border-left-color: #17a2b8 !important
+    }
+
+    .alert.callout.note .title {
+      color: #17a2b8
+    }
+
+    .alert.callout.note .icon-note {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 16 16' fill='%2317a2b8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z'/%3E%3C/svg%3E")
+    }
+
+    .alert.callout.tip {
+      border-left-color: #28a745 !important
+    }
+
+    .alert.callout.tip .title {
+      color: #28a745
+    }
+
+    .alert.callout.tip .icon-tip {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 352 512' fill='%2328a745' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M96.06 454.35c.01 6.29 1.87 12.45 5.36 17.69l17.09 25.69a31.99 31.99 0 0 0 26.64 14.28h61.71a31.99 31.99 0 0 0 26.64-14.28l17.09-25.69a31.989 31.989 0 0 0 5.36-17.69l.04-38.35H96.01l.05 38.35zM0 176c0 44.37 16.45 84.85 43.56 115.78 16.52 18.85 42.36 58.23 52.21 91.45.04.26.07.52.11.78h160.24c.04-.26.07-.51.11-.78 9.85-33.22 35.69-72.6 52.21-91.45C335.55 260.85 352 220.37 352 176 352 78.61 272.91-.3 175.45 0 73.44.31 0 82.97 0 176zm176-80c-44.11 0-80 35.89-80 80 0 8.84-7.16 16-16 16s-16-7.16-16-16c0-61.76 50.24-112 112-112 8.84 0 16 7.16 16 16s-7.16 16-16 16z'/%3E%3C/svg%3E")
+    }
+
+    .alert.callout.warning {
+      border-left-color: #f0ad4e !important
+    }
+
+    .alert.callout.warning .title {
+      color: #f0ad4e
+    }
+
+    .alert.callout.warning .icon-warning {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 17 16' fill='%23f0ad4e' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 5zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3E%3C/svg%3E")
+    }
+
+    .alert.callout.attention {
+      border-left-color: #dc3545 !important
+    }
+
+    .alert.callout.attention .title {
+      color: #dc3545
+    }
+
+    .alert.callout.attention .icon-attention {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 16 16' fill='%23dc3545' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath fill-rule='evenodd' d='M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E")
+    }
+
+    .alert.flat {
+      background-color: #e2e3e5;
+      border: 1px solid #d6d8db;
+      border-radius: .125rem;
+      color: #383d41
+    }
+
+    .alert.flat.note {
+      background-color: #cdeefd;
+      border-color: #b4e6fc;
+      color: #02587f
+    }
+
+    .alert.flat.note .title {
+      color: #01354d
+    }
+
+    .alert.flat.note .icon-note {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 16 16' fill='%2301354d' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z'/%3E%3C/svg%3E")
+    }
+
+    .alert.flat.tip {
+      background-color: #dbefdc;
+      border-color: #c9e7cb;
+      color: #285b2a
+    }
+
+    .alert.flat.tip .title {
+      color: #18381a
+    }
+
+    .alert.flat.tip .icon-tip {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 352 512' fill='%2318381a' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M96.06 454.35c.01 6.29 1.87 12.45 5.36 17.69l17.09 25.69a31.99 31.99 0 0 0 26.64 14.28h61.71a31.99 31.99 0 0 0 26.64-14.28l17.09-25.69a31.989 31.989 0 0 0 5.36-17.69l.04-38.35H96.01l.05 38.35zM0 176c0 44.37 16.45 84.85 43.56 115.78 16.52 18.85 42.36 58.23 52.21 91.45.04.26.07.52.11.78h160.24c.04-.26.07-.51.11-.78 9.85-33.22 35.69-72.6 52.21-91.45C335.55 260.85 352 220.37 352 176 352 78.61 272.91-.3 175.45 0 73.44.31 0 82.97 0 176zm176-80c-44.11 0-80 35.89-80 80 0 8.84-7.16 16-16 16s-16-7.16-16-16c0-61.76 50.24-112 112-112 8.84 0 16 7.16 16 16s-7.16 16-16 16z'/%3E%3C/svg%3E")
+    }
+
+    .alert.flat.warning {
+      background-color: #ffddd3;
+      border-color: #ffc9ba;
+      color: #852d12
+    }
+
+    .alert.flat.warning .title {
+      color: #581e0c
+    }
+
+    .alert.flat.warning .icon-warning {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 17 16' fill='%23581e0c' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 5zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3E%3C/svg%3E")
+    }
+
+    .alert.flat.attention {
+      background-color: #fdd9d7;
+      border-color: #fcc2bf;
+      color: #7f231c
+    }
+
+    .alert.flat.attention .title {
+      color: #551713
+    }
+
+    .alert.flat.attention .icon-attention {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='1em' height='1em' viewBox='0 0 16 16' fill='%23551713' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath fill-rule='evenodd' d='M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E")
+    }
+  </style>
+  <style>
+    :root {
+      --theme-color: #126893;
+    }
+  </style>
+  <style>
+    .sidebar {
+      padding-top: 0;
+    }
+
+    .search {
+      margin-bottom: 20px;
+      padding: 6px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .search .input-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    .search .results-panel {
+      display: none;
+    }
+
+    .search .results-panel.show {
+      display: block;
+    }
+
+    .search input {
+      outline: none;
+      border: none;
+      width: 100%;
+      padding: 0.6em 7px;
+      font-size: inherit;
+      border: 1px solid transparent;
+    }
+
+    .search input:focus {
+      box-shadow: 0 0 5px var(--theme-color, #42b983);
+      border: 1px solid var(--theme-color, #42b983);
+    }
+
+    .search input::-webkit-search-decoration,
+    .search input::-webkit-search-cancel-button,
+    .search input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    .search input::-ms-clear {
+      display: none;
+      height: 0;
+      width: 0;
+    }
+
+    .search .clear-button {
+      cursor: pointer;
+      width: 36px;
+      text-align: right;
+      display: none;
+    }
+
+    .search .clear-button.show {
+      display: block;
+    }
+
+    .search .clear-button svg {
+      transform: scale(.5);
+    }
+
+    .search h2 {
+      font-size: 17px;
+      margin: 10px 0;
+    }
+
+    .search a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .search .matching-post {
+      border-bottom: 1px solid #eee;
+    }
+
+    .search .matching-post:last-child {
+      border-bottom: 0;
+    }
+
+    .search p {
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .search p.empty {
+      text-align: center;
+    }
+
+    .app-name.hide,
+    .sidebar-nav.hide {
+      display: none;
+    }
+  </style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+  <style></style>
+</head>
+
+<body class="ready sticky ready-fix close" data-page="Assignments/Sample_Project.md">
+  <nav class="app-nav"></nav>
+  <main><button class="sidebar-toggle" aria-label="Menu">
+      <div class="sidebar-toggle-button"><span></span><span></span><span></span></div>
+    </button>
+    <aside class="sidebar">
+      <h1 class="app-name"><a class="app-name-link" data-nosearch="" href="/"><img alt="Syllabus Template"
+            src="/priceless-negotiation/static/logo-icononly.svg"></a></h1>
+      <div class="sidebar-nav">
+    <ul>
+        <li><strong><a href="/" title="Syllabus">Syllabus</a></strong></li>
+        <li><strong>Lessons</strong>
+            <ul>
+                
+                
+                <li><a href="/priceless-negotiation/0-origin and evolution of go/0-origin and evolution of go.html" title="Origin And Evolution Of Go">Origin And Evolution Of Go</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/1-reasons for developing go/1-reasons for developing go.html" title="Reasons For Developing Go">Reasons For Developing Go</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/2-characteristics of go/2-characteristics of go.html" title="Characteristics Of Go">Characteristics Of Go</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/3-test yourself/3-test yourself.html" title="Test Yourself">Test Yourself</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/4-filenames keywords and identifiers/4-filenames keywords and identifiers.html" title="Filenames Keywords And Identifiers">Filenames Keywords And Identifiers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/5-import functionality/5-import functionality.html" title="Import Functionality">Import Functionality</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/6-overview of functions/6-overview of functions.html" title="Overview Of Functions">Overview Of Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/7-overview of data types/7-overview of data types.html" title="Overview Of Data Types">Overview Of Data Types</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/8-constants/8-constants.html" title="Constants">Constants</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/9-variables/9-variables.html" title="Variables">Variables</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/10-scope of variables/10-scope of variables.html" title="Scope Of Variables">Scope Of Variables</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/11-elementary types/11-elementary types.html" title="Elementary Types">Elementary Types</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/12-operators/12-operators.html" title="Operators">Operators</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/13-challenge temperature conversion/13-challenge temperature conversion.html" title="Challenge Temperature Conversion">Challenge Temperature Conversion</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/14-solution review temperature conversion/14-solution review temperature conversion.html" title="Solution Review Temperature Conversion">Solution Review Temperature Conversion</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/15-strings/15-strings.html" title="Strings">Strings</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/16-strings and strconv package/16-strings and strconv package.html" title="Strings And Strconv Package">Strings And Strconv Package</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/17-times and dates/17-times and dates.html" title="Times And Dates">Times And Dates</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/18-pointers/18-pointers.html" title="Pointers">Pointers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/19-quiz deduce the outputs/19-quiz deduce the outputs.html" title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/20-the if else construct/20-the if else construct.html" title="The If Else Construct">The If Else Construct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/21-testing for errors on functions/21-testing for errors on functions.html" title="Testing For Errors On Functions">Testing For Errors On Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/22-the switch case construct/22-the switch case construct.html" title="The Switch Case Construct">The Switch Case Construct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/23-challenge season of a month/23-challenge season of a month.html" title="Challenge Season Of A Month">Challenge Season Of A Month</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/24-solution review season of a month/24-solution review season of a month.html" title="Solution Review Season Of A Month">Solution Review Season Of A Month</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/25-the for construct/25-the for construct.html" title="The For Construct">The For Construct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/26-the for range construct/26-the for range construct.html" title="The For Range Construct">The For Range Construct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/27-break and continue/27-break and continue.html" title="Break And Continue">Break And Continue</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/28-use of labels goto/28-use of labels goto.html" title="Use Of Labels Goto">Use Of Labels Goto</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/29-exercise deduce the outputs/29-exercise deduce the outputs.html" title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/30-introduction to functions/30-introduction to functions.html" title="Introduction To Functions">Introduction To Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/31-parameters and return values/31-parameters and return values.html" title="Parameters And Return Values">Parameters And Return Values</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/32-challenge multiple return values/32-challenge multiple return values.html" title="Challenge Multiple Return Values">Challenge Multiple Return Values</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/33-solution review multiple return values/33-solution review multiple return values.html" title="Solution Review Multiple Return Values">Solution Review Multiple Return Values</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/34-challenge variable number of arguments/34-challenge variable number of arguments.html" title="Challenge Variable Number Of Arguments">Challenge Variable Number Of Arguments</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/35-solution review variable number of arguments/35-solution review variable number of arguments.html" title="Solution Review Variable Number Of Arguments">Solution Review Variable Number Of Arguments</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/36-defer and tracing/36-defer and tracing.html" title="Defer And Tracing">Defer And Tracing</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/37-built in functions/37-built in functions.html" title="Built In Functions">Built In Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/38-recursive functions/38-recursive functions.html" title="Recursive Functions">Recursive Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/39-challenge compute factorial of a number/39-challenge compute factorial of a number.html" title="Challenge Compute Factorial Of A Number">Challenge Compute Factorial Of A Number</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/40-solution review compute factorial of a number/40-solution review compute factorial of a number.html" title="Solution Review Compute Factorial Of A Number">Solution Review Compute Factorial Of A Number</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/41-higher order functions/41-higher order functions.html" title="Higher Order Functions">Higher Order Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/42-challenge filter even and odd numbers/42-challenge filter even and odd numbers.html" title="Challenge Filter Even And Odd Numbers">Challenge Filter Even And Odd Numbers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/43-solution review filter even and odd numbers/43-solution review filter even and odd numbers.html" title="Solution Review Filter Even And Odd Numbers">Solution Review Filter Even And Odd Numbers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/44-closures/44-closures.html" title="Closures">Closures</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/45-functions as return variables/45-functions as return variables.html" title="Functions As Return Variables">Functions As Return Variables</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/46-debugging with closures/46-debugging with closures.html" title="Debugging With Closures">Debugging With Closures</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/47-optimizing programs/47-optimizing programs.html" title="Optimizing Programs">Optimizing Programs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/48-quiz deduce the outputs/48-quiz deduce the outputs.html" title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/49-declaration and initialization/49-declaration and initialization.html" title="Declaration And Initialization">Declaration And Initialization</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/50-array literals and parameters/50-array literals and parameters.html" title="Array Literals And Parameters">Array Literals And Parameters</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/51-challenge filling array with loop counter/51-challenge filling array with loop counter.html" title="Challenge Filling Array With Loop Counter">Challenge Filling Array With Loop Counter</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/52-solution review filling array with loop counter/52-solution review filling array with loop counter.html" title="Solution Review Filling Array With Loop Counter">Solution Review Filling Array With Loop Counter</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/53-challenge finding fibonacci numbers with array/53-challenge finding fibonacci numbers with array.html" title="Challenge Finding Fibonacci Numbers With Array">Challenge Finding Fibonacci Numbers With Array</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/54-solution review finding fibonacci numbers with array/54-solution review finding fibonacci numbers with array.html" title="Solution Review Finding Fibonacci Numbers With Array">Solution Review Finding Fibonacci Numbers With Array</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/55-slices/55-slices.html" title="Slices">Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/56-slices with functions/56-slices with functions.html" title="Slices With Functions">Slices With Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/57-challenge finding fibonacci numbers with slices/57-challenge finding fibonacci numbers with slices.html" title="Challenge Finding Fibonacci Numbers With Slices">Challenge Finding Fibonacci Numbers With Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/58-solution review finding fibonacci numbers with slices/58-solution review finding fibonacci numbers with slices.html" title="Solution Review Finding Fibonacci Numbers With Slices">Solution Review Finding Fibonacci Numbers With Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/59-multidimensionality/59-multidimensionality.html" title="Multidimensionality">Multidimensionality</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/60-bytes and slices/60-bytes and slices.html" title="Bytes And Slices">Bytes And Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/61-the for range construct/61-the for range construct.html" title="The For Range Construct">The For Range Construct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/62-reslicing/62-reslicing.html" title="Reslicing">Reslicing</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/63-copying and appending slices/63-copying and appending slices.html" title="Copying And Appending Slices">Copying And Appending Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/64-challenge magnify a slice/64-challenge magnify a slice.html" title="Challenge Magnify A Slice">Challenge Magnify A Slice</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/65-solution review magnify a slice/65-solution review magnify a slice.html" title="Solution Review Magnify A Slice">Solution Review Magnify A Slice</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/66-challenge inserting slice in a slice/66-challenge inserting slice in a slice.html" title="Challenge Inserting Slice In A Slice">Challenge Inserting Slice In A Slice</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/67-solution review inserting slice in a slice/67-solution review inserting slice in a slice.html" title="Solution Review Inserting Slice In A Slice">Solution Review Inserting Slice In A Slice</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/68-challenge filtering with higher order functions/68-challenge filtering with higher order functions.html" title="Challenge Filtering With Higher Order Functions">Challenge Filtering With Higher Order Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/69-solution review filtering with higher order functions/69-solution review filtering with higher order functions.html" title="Solution Review Filtering With Higher Order Functions">Solution Review Filtering With Higher Order Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/70-applying strings arrays and slices/70-applying strings arrays and slices.html" title="Applying Strings Arrays And Slices">Applying Strings Arrays And Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/71-challenge bubble sort the slice/71-challenge bubble sort the slice.html" title="Challenge Bubble Sort The Slice">Challenge Bubble Sort The Slice</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/72-solution review bubble sort the slice/72-solution review bubble sort the slice.html" title="Solution Review Bubble Sort The Slice">Solution Review Bubble Sort The Slice</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/73-challenge reverse a string/73-challenge reverse a string.html" title="Challenge Reverse A String">Challenge Reverse A String</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/74-solution review reverse a string/74-solution review reverse a string.html" title="Solution Review Reverse A String">Solution Review Reverse A String</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/75-quiz deduce the outputs/75-quiz deduce the outputs.html" title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/76-declaration and initialization/76-declaration and initialization.html" title="Declaration And Initialization">Declaration And Initialization</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/77-existence of key value item/77-existence of key value item.html" title="Existence Of Key Value Item">Existence Of Key Value Item</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/78-the for range construct/78-the for range construct.html" title="The For Range Construct">The For Range Construct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/79-challenge map the days/79-challenge map the days.html" title="Challenge Map The Days">Challenge Map The Days</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/80-solution review map the days/80-solution review map the days.html" title="Solution Review Map The Days">Solution Review Map The Days</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/81-a slice of maps/81-a slice of maps.html" title="A Slice Of Maps">A Slice Of Maps</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/82-sorting and inverting a map/82-sorting and inverting a map.html" title="Sorting And Inverting A Map">Sorting And Inverting A Map</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/83-quiz deduce the outputs/83-quiz deduce the outputs.html" title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/84-overview of the standard library/84-overview of the standard library.html" title="Overview Of The Standard Library">Overview Of The Standard Library</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/85-challenge construct a double linked list/85-challenge construct a double linked list.html" title="Challenge Construct A Double Linked List">Challenge Construct A Double Linked List</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/86-solution review construct a double linked list/86-solution review construct a double linked list.html" title="Solution Review Construct A Double Linked List">Solution Review Construct A Double Linked List</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/87-the regexp package/87-the regexp package.html" title="The Regexp Package">The Regexp Package</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/88-locking and the sync package/88-locking and the sync package.html" title="Locking And The Sync Package">Locking And The Sync Package</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/89-accurate computations and the big package/89-accurate computations and the big package.html" title="Accurate Computations And The Big Package">Accurate Computations And The Big Package</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/90-custom packages and visibility/90-custom packages and visibility.html" title="Custom Packages And Visibility">Custom Packages And Visibility</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/91-documenting your packages/91-documenting your packages.html" title="Documenting Your Packages">Documenting Your Packages</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/92-custom packages folder structure go install and go test/92-custom packages folder structure go install and go test.html" title="Custom Packages Folder Structure Go Install And Go Test">Custom Packages Folder Structure Go Install And Go Test</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/93-using git for distribution/93-using git for distribution.html" title="Using Git For Distribution">Using Git For Distribution</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/94-external packages projects and libraries/94-external packages projects and libraries.html" title="External Packages Projects And Libraries">External Packages Projects And Libraries</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/95-installing external packages/95-installing external packages.html" title="Installing External Packages">Installing External Packages</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/96-introduction to struct/96-introduction to struct.html" title="Introduction To Struct">Introduction To Struct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/97-advanced structs concepts/97-advanced structs concepts.html" title="Advanced Structs Concepts">Advanced Structs Concepts</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/98-factory method/98-factory method.html" title="Factory Method">Factory Method</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/99-structs with tags/99-structs with tags.html" title="Structs With Tags">Structs With Tags</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/100-anonymous fields and embedded structs/100-anonymous fields and embedded structs.html" title="Anonymous Fields And Embedded Structs">Anonymous Fields And Embedded Structs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/101-challenge anonymous struct/101-challenge anonymous struct.html" title="Challenge Anonymous Struct">Challenge Anonymous Struct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/102-solution review anonymous struct/102-solution review anonymous struct.html" title="Solution Review Anonymous Struct">Solution Review Anonymous Struct</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/103-introduction to methods/103-introduction to methods.html" title="Introduction To Methods">Introduction To Methods</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/104-methods versus functions/104-methods versus functions.html" title="Methods Versus Functions">Methods Versus Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/105-challenge coordinates of a point/105-challenge coordinates of a point.html" title="Challenge Coordinates Of A Point">Challenge Coordinates Of A Point</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/106-solution review coordinates of a point/106-solution review coordinates of a point.html" title="Solution Review Coordinates Of A Point">Solution Review Coordinates Of A Point</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/107-challenge make a rectangle/107-challenge make a rectangle.html" title="Challenge Make A Rectangle">Challenge Make A Rectangle</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/108-solution review make a rectangle/108-solution review make a rectangle.html" title="Solution Review Make A Rectangle">Solution Review Make A Rectangle</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/109-challenge decide employee salary/109-challenge decide employee salary.html" title="Challenge Decide Employee Salary">Challenge Decide Employee Salary</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/110-solution review decide employee salary/110-solution review decide employee salary.html" title="Solution Review Decide Employee Salary">Solution Review Decide Employee Salary</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/111-receivers and methods as pointers and values/111-receivers and methods as pointers and values.html" title="Receivers And Methods As Pointers And Values">Receivers And Methods As Pointers And Values</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/112-non exported fields/112-non exported fields.html" title="Non Exported Fields">Non Exported Fields</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/113-string method and format specifiers/113-string method and format specifiers.html" title="String Method And Format Specifiers">String Method And Format Specifiers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/114-methods on embedded types/114-methods on embedded types.html" title="Methods On Embedded Types">Methods On Embedded Types</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/115-multiple inheritance/115-multiple inheritance.html" title="Multiple Inheritance">Multiple Inheritance</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/116-challenge implement stack data structure/116-challenge implement stack data structure.html" title="Challenge Implement Stack Data Structure">Challenge Implement Stack Data Structure</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/117-solution review implement stack data structure/117-solution review implement stack data structure.html" title="Solution Review Implement Stack Data Structure">Solution Review Implement Stack Data Structure</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/118-garbage collection and setfinalizer/118-garbage collection and setfinalizer.html" title="Garbage Collection And Setfinalizer">Garbage Collection And Setfinalizer</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/119-quiz deduce the outputs/119-quiz deduce the outputs.html" title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/120-what is an interface/120-what is an interface.html" title="What Is An Interface">What Is An Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/121-challenge make a simple interface/121-challenge make a simple interface.html" title="Challenge Make A Simple Interface">Challenge Make A Simple Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/122-solution review make a simple interface/122-solution review make a simple interface.html" title="Solution Review Make A Simple Interface">Solution Review Make A Simple Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/123-embedded interface and type assertions/123-embedded interface and type assertions.html" title="Embedded Interface And Type Assertions">Embedded Interface And Type Assertions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/124-the type switch/124-the type switch.html" title="The Type Switch">The Type Switch</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/125-challenge advancing the simple interface/125-challenge advancing the simple interface.html" title="Challenge Advancing The Simple Interface">Challenge Advancing The Simple Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/126-solution review advancing the simple interface/126-solution review advancing the simple interface.html" title="Solution Review Advancing The Simple Interface">Solution Review Advancing The Simple Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/127-implementation of interfaces/127-implementation of interfaces.html" title="Implementation Of Interfaces">Implementation Of Interfaces</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/128-sorting with the sorter interface/128-sorting with the sorter interface.html" title="Sorting With The Sorter Interface">Sorting With The Sorter Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/129-challenge advancing the shapes analysis/129-challenge advancing the shapes analysis.html" title="Challenge Advancing The Shapes Analysis">Challenge Advancing The Shapes Analysis</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/130-solution review advancing the shapes analysis/130-solution review advancing the shapes analysis.html" title="Solution Review Advancing The Shapes Analysis">Solution Review Advancing The Shapes Analysis</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/131-challenge sort people with sorter interface/131-challenge sort people with sorter interface.html" title="Challenge Sort People With Sorter Interface">Challenge Sort People With Sorter Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/132-solution review sort people with sorter interface/132-solution review sort people with sorter interface.html" title="Solution Review Sort People With Sorter Interface">Solution Review Sort People With Sorter Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/133-reading and writing/133-reading and writing.html" title="Reading And Writing">Reading And Writing</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/134-empty interface/134-empty interface.html" title="Empty Interface">Empty Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/135-challenge implement miner interface/135-challenge implement miner interface.html" title="Challenge Implement Miner Interface">Challenge Implement Miner Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/136-solution review implement miner interface/136-solution review implement miner interface.html" title="Solution Review Implement Miner Interface">Solution Review Implement Miner Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/137-the reflect package/137-the reflect package.html" title="The Reflect Package">The Reflect Package</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/138-printf and reflection/138-printf and reflection.html" title="Printf And Reflection">Printf And Reflection</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/139-interfaces and dynamic typing/139-interfaces and dynamic typing.html" title="Interfaces And Dynamic Typing">Interfaces And Dynamic Typing</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/140-structs collections and higher order functions/140-structs collections and higher order functions.html" title="Structs Collections And Higher Order Functions">Structs Collections And Higher Order Functions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/141-challenge make a stack with variable internal types/141-challenge make a stack with variable internal types.html" title="Challenge Make A Stack With Variable Internal Types">Challenge Make A Stack With Variable Internal Types</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/142-solution review make a stack with variable internal types/142-solution review make a stack with variable internal types.html" title="Solution Review Make A Stack With Variable Internal Types">Solution Review Make A Stack With Variable Internal Types</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/143-the object orientation in go/143-the object orientation in go.html" title="The Object Orientation In Go">The Object Orientation In Go</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/144-quiz deduce the outputs/144-quiz deduce the outputs.html" title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/145-reading input from the user/145-reading input from the user.html" title="Reading Input From The User">Reading Input From The User</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/146-challenge analyzing input from keyboard/146-challenge analyzing input from keyboard.html" title="Challenge Analyzing Input From Keyboard">Challenge Analyzing Input From Keyboard</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/147-solution review analyzing input from keyboard/147-solution review analyzing input from keyboard.html" title="Solution Review Analyzing Input From Keyboard">Solution Review Analyzing Input From Keyboard</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/148-reading from a file/148-reading from a file.html" title="Reading From A File">Reading From A File</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/149-writing to a file/149-writing to a file.html" title="Writing To A File">Writing To A File</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/150-challenge read csv file/150-challenge read csv file.html" title="Challenge Read Csv File">Challenge Read Csv File</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/151-solution review read csv file/151-solution review read csv file.html" title="Solution Review Read Csv File">Solution Review Read Csv File</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/152-challenge writing to a wiki page/152-challenge writing to a wiki page.html" title="Challenge Writing To A Wiki Page">Challenge Writing To A Wiki Page</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/153-solution review writing to a wiki page/153-solution review writing to a wiki page.html" title="Solution Review Writing To A Wiki Page">Solution Review Writing To A Wiki Page</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/154-copying files/154-copying files.html" title="Copying Files">Copying Files</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/155-reading arguments from the command line/155-reading arguments from the command line.html" title="Reading Arguments From The Command Line">Reading Arguments From The Command Line</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/156-reading files with a buffer/156-reading files with a buffer.html" title="Reading Files With A Buffer">Reading Files With A Buffer</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/157-reading and writing files with slices/157-reading and writing files with slices.html" title="Reading And Writing Files With Slices">Reading And Writing Files With Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/158-scanning inputs/158-scanning inputs.html" title="Scanning Inputs">Scanning Inputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/159-a practical example of interfaces/159-a practical example of interfaces.html" title="A Practical Example Of Interfaces">A Practical Example Of Interfaces</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/160-the json data format/160-the json data format.html" title="The Json Data Format">The Json Data Format</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/161-decoding with json/161-decoding with json.html" title="Decoding With Json">Decoding With Json</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/162-the xml data format/162-the xml data format.html" title="The Xml Data Format">The Xml Data Format</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/163-data transport through gob/163-data transport through gob.html" title="Data Transport Through Gob">Data Transport Through Gob</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/164-challenge decode the contents/164-challenge decode the contents.html" title="Challenge Decode The Contents">Challenge Decode The Contents</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/165-solution review decode the contents/165-solution review decode the contents.html" title="Solution Review Decode The Contents">Solution Review Decode The Contents</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/166-cryptography with go/166-cryptography with go.html" title="Cryptography With Go">Cryptography With Go</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/167-exercise deduce the outputs/167-exercise deduce the outputs.html" title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/168-error handling/168-error handling.html" title="Error Handling">Error Handling</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/169-run time exceptions and panic/169-run time exceptions and panic.html" title="Run Time Exceptions And Panic">Run Time Exceptions And Panic</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/170-recover/170-recover.html" title="Recover">Recover</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/171-error handling and panicking in a user defined package/171-error handling and panicking in a user defined package.html" title="Error Handling And Panicking In A User Defined Package">Error Handling And Panicking In A User Defined Package</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/172-error handling scheme with closures/172-error handling scheme with closures.html" title="Error Handling Scheme With Closures">Error Handling Scheme With Closures</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/173-challenge generate panic from division by 0/173-challenge generate panic from division by 0.html" title="Challenge Generate Panic From Division By 0">Challenge Generate Panic From Division By 0</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/174-solution review generate panic from division by 0/174-solution review generate panic from division by 0.html" title="Solution Review Generate Panic From Division By 0">Solution Review Generate Panic From Division By 0</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/175-starting an external command or program/175-starting an external command or program.html" title="Starting An External Command Or Program">Starting An External Command Or Program</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/176-testing and benchmarking in go/176-testing and benchmarking in go.html" title="Testing And Benchmarking In Go">Testing And Benchmarking In Go</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/177-testing a concrete example/177-testing a concrete example.html" title="Testing A Concrete Example">Testing A Concrete Example</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/178-using table driven tests/178-using table driven tests.html" title="Using Table Driven Tests">Using Table Driven Tests</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/179-investigating performance/179-investigating performance.html" title="Investigating Performance">Investigating Performance</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/180-exercise deduce the outputs/180-exercise deduce the outputs.html" title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/181-handling concurrency and parallelism with go/181-handling concurrency and parallelism with go.html" title="Handling Concurrency And Parallelism With Go">Handling Concurrency And Parallelism With Go</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/182-implementing goroutines/182-implementing goroutines.html" title="Implementing Goroutines">Implementing Goroutines</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/183-introduction to channels/183-introduction to channels.html" title="Introduction To Channels">Introduction To Channels</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/184-synchronous and asynchronous communication/184-synchronous and asynchronous communication.html" title="Synchronous And Asynchronous Communication">Synchronous And Asynchronous Communication</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/185-challenge demonstrate the blocking nature/185-challenge demonstrate the blocking nature.html" title="Challenge Demonstrate The Blocking Nature">Challenge Demonstrate The Blocking Nature</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/186-solution review demonstrate the blocking nature/186-solution review demonstrate the blocking nature.html" title="Solution Review Demonstrate The Blocking Nature">Solution Review Demonstrate The Blocking Nature</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/187-semaphore pattern/187-semaphore pattern.html" title="Semaphore Pattern">Semaphore Pattern</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/188-channel factory and producer consumer pattern/188-channel factory and producer consumer pattern.html" title="Channel Factory And Producer Consumer Pattern">Channel Factory And Producer Consumer Pattern</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/189-challenge summing the integers/189-challenge summing the integers.html" title="Challenge Summing The Integers">Challenge Summing The Integers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/190-solution review summing the integers/190-solution review summing the integers.html" title="Solution Review Summing The Integers">Solution Review Summing The Integers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/191-channel directionality/191-channel directionality.html" title="Channel Directionality">Channel Directionality</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/192-synchronization of goroutines/192-synchronization of goroutines.html" title="Synchronization Of Goroutines">Synchronization Of Goroutines</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/193-switching between goroutines/193-switching between goroutines.html" title="Switching Between Goroutines">Switching Between Goroutines</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/194-challenge devise random bit generator/194-challenge devise random bit generator.html" title="Challenge Devise Random Bit Generator">Challenge Devise Random Bit Generator</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/195-solution review devise random bit generator/195-solution review devise random bit generator.html" title="Solution Review Devise Random Bit Generator">Solution Review Devise Random Bit Generator</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/196-challenge map polar points to cartesian points/196-challenge map polar points to cartesian points.html" title="Challenge Map Polar Points To Cartesian Points">Challenge Map Polar Points To Cartesian Points</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/197-solution review map polar points to cartesian points/197-solution review map polar points to cartesian points.html" title="Solution Review Map Polar Points To Cartesian Points">Solution Review Map Polar Points To Cartesian Points</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/198-channels timeouts and tickers/198-channels timeouts and tickers.html" title="Channels Timeouts And Tickers">Channels Timeouts And Tickers</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/199-using recover with goroutines/199-using recover with goroutines.html" title="Using Recover With Goroutines">Using Recover With Goroutines</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/200-tasks and worker processes/200-tasks and worker processes.html" title="Tasks And Worker Processes">Tasks And Worker Processes</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/201-implementing a lazy generator/201-implementing a lazy generator.html" title="Implementing A Lazy Generator">Implementing A Lazy Generator</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/202-anonymous closure/202-anonymous closure.html" title="Anonymous Closure">Anonymous Closure</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/203-implementing futures/203-implementing futures.html" title="Implementing Futures">Implementing Futures</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/204-multiplexing/204-multiplexing.html" title="Multiplexing">Multiplexing</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/205-limiting the number of requests/205-limiting the number of requests.html" title="Limiting The Number Of Requests">Limiting The Number Of Requests</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/206-chaining and parallelizing computation/206-chaining and parallelizing computation.html" title="Chaining And Parallelizing Computation">Chaining And Parallelizing Computation</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/207-the leaky bucket algorithm/207-the leaky bucket algorithm.html" title="The Leaky Bucket Algorithm">The Leaky Bucket Algorithm</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/208-benchmarking accessing and listening/208-benchmarking accessing and listening.html" title="Benchmarking Accessing And Listening">Benchmarking Accessing And Listening</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/209-exercise deduce the outputs/209-exercise deduce the outputs.html" title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/210-a tcp server/210-a tcp server.html" title="A Tcp Server">A Tcp Server</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/211-a simple web server/211-a simple web server.html" title="A Simple Web Server">A Simple Web Server</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/212-polling websites and reading web page/212-polling websites and reading web page.html" title="Polling Websites And Reading Web Page">Polling Websites And Reading Web Page</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/213-writing a simple web application/213-writing a simple web application.html" title="Writing A Simple Web Application">Writing A Simple Web Application</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/214-challenge web application for statistics/214-challenge web application for statistics.html" title="Challenge Web Application For Statistics">Challenge Web Application For Statistics</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/215-solution review web application for statistics/215-solution review web application for statistics.html" title="Solution Review Web Application For Statistics">Solution Review Web Application For Statistics</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/216-making a web application robust/216-making a web application robust.html" title="Making A Web Application Robust">Making A Web Application Robust</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/217-writing web application with templates/217-writing web application with templates.html" title="Writing Web Application With Templates">Writing Web Application With Templates</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/218-exploring the template package/218-exploring the template package.html" title="Exploring The Template Package">Exploring The Template Package</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/219-challenge web application for serving guests/219-challenge web application for serving guests.html" title="Challenge Web Application For Serving Guests">Challenge Web Application For Serving Guests</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/220-solution review web application for serving guests/220-solution review web application for serving guests.html" title="Solution Review Web Application For Serving Guests">Solution Review Web Application For Serving Guests</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/221-an elaborate web server/221-an elaborate web server.html" title="An Elaborate Web Server">An Elaborate Web Server</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/222-remote procedure calls with rpc/222-remote procedure calls with rpc.html" title="Remote Procedure Calls With Rpc">Remote Procedure Calls With Rpc</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/223-sending mails with smtp/223-sending mails with smtp.html" title="Sending Mails With Smtp">Sending Mails With Smtp</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/224-go in the cloud/224-go in the cloud.html" title="Go In The Cloud">Go In The Cloud</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/225-regular mistakes and suggestions/225-regular mistakes and suggestions.html" title="Regular Mistakes And Suggestions">Regular Mistakes And Suggestions</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/226-highlights from the previous chapters/226-highlights from the previous chapters.html" title="Highlights From The Previous Chapters">Highlights From The Previous Chapters</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/227-the comma ok pattern/227-the comma ok pattern.html" title="The Comma Ok Pattern">The Comma Ok Pattern</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/228-the defer pattern/228-the defer pattern.html" title="The Defer Pattern">The Defer Pattern</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/229-visibility and operator patterns/229-visibility and operator patterns.html" title="Visibility And Operator Patterns">Visibility And Operator Patterns</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/230-strings arrays and slices/230-strings arrays and slices.html" title="Strings Arrays And Slices">Strings Arrays And Slices</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/231-structs interfaces and maps/231-structs interfaces and maps.html" title="Structs Interfaces And Maps">Structs Interfaces And Maps</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/232-functions and files/232-functions and files.html" title="Functions And Files">Functions And Files</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/233-goroutines and networking/233-goroutines and networking.html" title="Goroutines And Networking">Goroutines And Networking</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/234-suggestions and considerations/234-suggestions and considerations.html" title="Suggestions And Considerations">Suggestions And Considerations</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/235-introduction/235-introduction.html" title="Introduction">Introduction</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/236-setting up the structure of application/236-setting up the structure of application.html" title="Setting Up The Structure Of Application">Setting Up The Structure Of Application</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/237-our user interface/237-our user interface.html" title="Our User Interface">Our User Interface</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/238-persistent storage with gob/238-persistent storage with gob.html" title="Persistent Storage With Gob">Persistent Storage With Gob</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/239-using goroutines for performance/239-using goroutines for performance.html" title="Using Goroutines For Performance">Using Goroutines For Performance</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/240-persistent storage with json/240-persistent storage with json.html" title="Persistent Storage With Json">Persistent Storage With Json</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/241-enhancements/241-enhancements.html" title="Enhancements">Enhancements</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/242-platforms and architectures/242-platforms and architectures.html" title="Platforms And Architectures">Platforms And Architectures</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/243-installing go and the go tools chain in binary format/243-installing go and the go tools chain in binary format.html" title="Installing Go And The Go Tools Chain In Binary Format">Installing Go And The Go Tools Chain In Binary Format</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/244-installing go from source/244-installing go from source.html" title="Installing Go From Source">Installing Go From Source</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/245-go work environment/245-go work environment.html" title="Go Work Environment">Go Work Environment</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/246-basic requirements for a go environment/246-basic requirements for a go environment.html" title="Basic Requirements For A Go Environment">Basic Requirements For A Go Environment</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/247-editors and integrated development environments/247-editors and integrated development environments.html" title="Editors And Integrated Development Environments">Editors And Integrated Development Environments</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/248-debugging/248-debugging.html" title="Debugging">Debugging</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/249-formatting the code/249-formatting the code.html" title="Formatting The Code">Formatting The Code</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/250-building and running go programs/250-building and running go programs.html" title="Building And Running Go Programs">Building And Running Go Programs</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/251-searching for help and documenting the code/251-searching for help and documenting the code.html" title="Searching For Help And Documenting The Code">Searching For Help And Documenting The Code</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/252-tools and go s performance/252-tools and go s performance.html" title="Tools And Go S Performance">Tools And Go S Performance</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/253-interaction with c and cplusplus/253-interaction with c and cplusplus.html" title="Interaction With C And Cplusplus">Interaction With C And Cplusplus</a></li>
+                
+                
+                <li><a href="/priceless-negotiation/254-helpful resources/254-helpful resources.html" title="Helpful Resources">Helpful Resources</a></li>
+                
+            </ul>
+        </li>
+    </ul>
+</div>
+    </aside>
+    <section class="content" style="overflow-y: auto;">
+      <article class="markdown-section" id="main">
+        <h1 id="class-assignment-title"><a href="/Assignments/Sample_Project?id=class-assignment-title"
+            data-id="class-assignment-title" class="anchor"><span>The Way to Go - Learn Interactively</span></a></h1>
+        <h2 id="description"><span>Course Overview</span></a></h2>
+        <p>Go (sometimes called Golang) is one of the most popular languages today, and is a key part of many enterprise tech stacks. Many developers prefer Go to other languages like C++ and Scala because of its memory management model which allows for easier concurrency.
+
+In this course, you will learn the core constructs and techniques of the language. After going through the basics, you will then learn more advanced Go concepts like error-handling, networking, and templating. You'll learn how to program efficiently in Go by gaining knowledge of common pitfalls and patterns, as well as by building your own applications.</p>
+      </article>
+      <article class="markdown-section" id="main">
+        <h2 id="description"><span>Course Content</span></a></h2>
+        <div class="table-wrapper">
+          <table id="_eiwfoklkm">
+            <thead>
+              <tr>
+                <th align="center">#</th>
+                <th align="center">Lesson</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              
+              <tr>
+                <td align="center">0</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/0-origin and evolution of go/0-origin and evolution of go.html"
+                      title="Origin And Evolution Of Go">Origin And Evolution Of Go</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">1</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/1-reasons for developing go/1-reasons for developing go.html"
+                      title="Reasons For Developing Go">Reasons For Developing Go</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">2</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/2-characteristics of go/2-characteristics of go.html"
+                      title="Characteristics Of Go">Characteristics Of Go</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">3</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/3-test yourself/3-test yourself.html"
+                      title="Test Yourself">Test Yourself</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">4</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/4-filenames keywords and identifiers/4-filenames keywords and identifiers.html"
+                      title="Filenames Keywords And Identifiers">Filenames Keywords And Identifiers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">5</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/5-import functionality/5-import functionality.html"
+                      title="Import Functionality">Import Functionality</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">6</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/6-overview of functions/6-overview of functions.html"
+                      title="Overview Of Functions">Overview Of Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">7</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/7-overview of data types/7-overview of data types.html"
+                      title="Overview Of Data Types">Overview Of Data Types</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">8</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/8-constants/8-constants.html"
+                      title="Constants">Constants</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">9</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/9-variables/9-variables.html"
+                      title="Variables">Variables</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">10</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/10-scope of variables/10-scope of variables.html"
+                      title="Scope Of Variables">Scope Of Variables</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">11</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/11-elementary types/11-elementary types.html"
+                      title="Elementary Types">Elementary Types</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">12</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/12-operators/12-operators.html"
+                      title="Operators">Operators</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">13</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/13-challenge temperature conversion/13-challenge temperature conversion.html"
+                      title="Challenge Temperature Conversion">Challenge Temperature Conversion</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">14</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/14-solution review temperature conversion/14-solution review temperature conversion.html"
+                      title="Solution Review Temperature Conversion">Solution Review Temperature Conversion</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">15</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/15-strings/15-strings.html"
+                      title="Strings">Strings</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">16</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/16-strings and strconv package/16-strings and strconv package.html"
+                      title="Strings And Strconv Package">Strings And Strconv Package</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">17</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/17-times and dates/17-times and dates.html"
+                      title="Times And Dates">Times And Dates</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">18</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/18-pointers/18-pointers.html"
+                      title="Pointers">Pointers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">19</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/19-quiz deduce the outputs/19-quiz deduce the outputs.html"
+                      title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">20</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/20-the if else construct/20-the if else construct.html"
+                      title="The If Else Construct">The If Else Construct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">21</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/21-testing for errors on functions/21-testing for errors on functions.html"
+                      title="Testing For Errors On Functions">Testing For Errors On Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">22</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/22-the switch case construct/22-the switch case construct.html"
+                      title="The Switch Case Construct">The Switch Case Construct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">23</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/23-challenge season of a month/23-challenge season of a month.html"
+                      title="Challenge Season Of A Month">Challenge Season Of A Month</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">24</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/24-solution review season of a month/24-solution review season of a month.html"
+                      title="Solution Review Season Of A Month">Solution Review Season Of A Month</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">25</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/25-the for construct/25-the for construct.html"
+                      title="The For Construct">The For Construct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">26</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/26-the for range construct/26-the for range construct.html"
+                      title="The For Range Construct">The For Range Construct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">27</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/27-break and continue/27-break and continue.html"
+                      title="Break And Continue">Break And Continue</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">28</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/28-use of labels goto/28-use of labels goto.html"
+                      title="Use Of Labels Goto">Use Of Labels Goto</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">29</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/29-exercise deduce the outputs/29-exercise deduce the outputs.html"
+                      title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">30</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/30-introduction to functions/30-introduction to functions.html"
+                      title="Introduction To Functions">Introduction To Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">31</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/31-parameters and return values/31-parameters and return values.html"
+                      title="Parameters And Return Values">Parameters And Return Values</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">32</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/32-challenge multiple return values/32-challenge multiple return values.html"
+                      title="Challenge Multiple Return Values">Challenge Multiple Return Values</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">33</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/33-solution review multiple return values/33-solution review multiple return values.html"
+                      title="Solution Review Multiple Return Values">Solution Review Multiple Return Values</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">34</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/34-challenge variable number of arguments/34-challenge variable number of arguments.html"
+                      title="Challenge Variable Number Of Arguments">Challenge Variable Number Of Arguments</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">35</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/35-solution review variable number of arguments/35-solution review variable number of arguments.html"
+                      title="Solution Review Variable Number Of Arguments">Solution Review Variable Number Of Arguments</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">36</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/36-defer and tracing/36-defer and tracing.html"
+                      title="Defer And Tracing">Defer And Tracing</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">37</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/37-built in functions/37-built in functions.html"
+                      title="Built In Functions">Built In Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">38</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/38-recursive functions/38-recursive functions.html"
+                      title="Recursive Functions">Recursive Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">39</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/39-challenge compute factorial of a number/39-challenge compute factorial of a number.html"
+                      title="Challenge Compute Factorial Of A Number">Challenge Compute Factorial Of A Number</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">40</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/40-solution review compute factorial of a number/40-solution review compute factorial of a number.html"
+                      title="Solution Review Compute Factorial Of A Number">Solution Review Compute Factorial Of A Number</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">41</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/41-higher order functions/41-higher order functions.html"
+                      title="Higher Order Functions">Higher Order Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">42</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/42-challenge filter even and odd numbers/42-challenge filter even and odd numbers.html"
+                      title="Challenge Filter Even And Odd Numbers">Challenge Filter Even And Odd Numbers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">43</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/43-solution review filter even and odd numbers/43-solution review filter even and odd numbers.html"
+                      title="Solution Review Filter Even And Odd Numbers">Solution Review Filter Even And Odd Numbers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">44</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/44-closures/44-closures.html"
+                      title="Closures">Closures</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">45</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/45-functions as return variables/45-functions as return variables.html"
+                      title="Functions As Return Variables">Functions As Return Variables</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">46</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/46-debugging with closures/46-debugging with closures.html"
+                      title="Debugging With Closures">Debugging With Closures</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">47</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/47-optimizing programs/47-optimizing programs.html"
+                      title="Optimizing Programs">Optimizing Programs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">48</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/48-quiz deduce the outputs/48-quiz deduce the outputs.html"
+                      title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">49</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/49-declaration and initialization/49-declaration and initialization.html"
+                      title="Declaration And Initialization">Declaration And Initialization</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">50</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/50-array literals and parameters/50-array literals and parameters.html"
+                      title="Array Literals And Parameters">Array Literals And Parameters</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">51</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/51-challenge filling array with loop counter/51-challenge filling array with loop counter.html"
+                      title="Challenge Filling Array With Loop Counter">Challenge Filling Array With Loop Counter</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">52</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/52-solution review filling array with loop counter/52-solution review filling array with loop counter.html"
+                      title="Solution Review Filling Array With Loop Counter">Solution Review Filling Array With Loop Counter</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">53</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/53-challenge finding fibonacci numbers with array/53-challenge finding fibonacci numbers with array.html"
+                      title="Challenge Finding Fibonacci Numbers With Array">Challenge Finding Fibonacci Numbers With Array</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">54</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/54-solution review finding fibonacci numbers with array/54-solution review finding fibonacci numbers with array.html"
+                      title="Solution Review Finding Fibonacci Numbers With Array">Solution Review Finding Fibonacci Numbers With Array</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">55</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/55-slices/55-slices.html"
+                      title="Slices">Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">56</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/56-slices with functions/56-slices with functions.html"
+                      title="Slices With Functions">Slices With Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">57</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/57-challenge finding fibonacci numbers with slices/57-challenge finding fibonacci numbers with slices.html"
+                      title="Challenge Finding Fibonacci Numbers With Slices">Challenge Finding Fibonacci Numbers With Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">58</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/58-solution review finding fibonacci numbers with slices/58-solution review finding fibonacci numbers with slices.html"
+                      title="Solution Review Finding Fibonacci Numbers With Slices">Solution Review Finding Fibonacci Numbers With Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">59</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/59-multidimensionality/59-multidimensionality.html"
+                      title="Multidimensionality">Multidimensionality</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">60</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/60-bytes and slices/60-bytes and slices.html"
+                      title="Bytes And Slices">Bytes And Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">61</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/61-the for range construct/61-the for range construct.html"
+                      title="The For Range Construct">The For Range Construct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">62</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/62-reslicing/62-reslicing.html"
+                      title="Reslicing">Reslicing</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">63</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/63-copying and appending slices/63-copying and appending slices.html"
+                      title="Copying And Appending Slices">Copying And Appending Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">64</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/64-challenge magnify a slice/64-challenge magnify a slice.html"
+                      title="Challenge Magnify A Slice">Challenge Magnify A Slice</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">65</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/65-solution review magnify a slice/65-solution review magnify a slice.html"
+                      title="Solution Review Magnify A Slice">Solution Review Magnify A Slice</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">66</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/66-challenge inserting slice in a slice/66-challenge inserting slice in a slice.html"
+                      title="Challenge Inserting Slice In A Slice">Challenge Inserting Slice In A Slice</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">67</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/67-solution review inserting slice in a slice/67-solution review inserting slice in a slice.html"
+                      title="Solution Review Inserting Slice In A Slice">Solution Review Inserting Slice In A Slice</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">68</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/68-challenge filtering with higher order functions/68-challenge filtering with higher order functions.html"
+                      title="Challenge Filtering With Higher Order Functions">Challenge Filtering With Higher Order Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">69</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/69-solution review filtering with higher order functions/69-solution review filtering with higher order functions.html"
+                      title="Solution Review Filtering With Higher Order Functions">Solution Review Filtering With Higher Order Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">70</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/70-applying strings arrays and slices/70-applying strings arrays and slices.html"
+                      title="Applying Strings Arrays And Slices">Applying Strings Arrays And Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">71</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/71-challenge bubble sort the slice/71-challenge bubble sort the slice.html"
+                      title="Challenge Bubble Sort The Slice">Challenge Bubble Sort The Slice</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">72</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/72-solution review bubble sort the slice/72-solution review bubble sort the slice.html"
+                      title="Solution Review Bubble Sort The Slice">Solution Review Bubble Sort The Slice</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">73</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/73-challenge reverse a string/73-challenge reverse a string.html"
+                      title="Challenge Reverse A String">Challenge Reverse A String</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">74</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/74-solution review reverse a string/74-solution review reverse a string.html"
+                      title="Solution Review Reverse A String">Solution Review Reverse A String</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">75</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/75-quiz deduce the outputs/75-quiz deduce the outputs.html"
+                      title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">76</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/76-declaration and initialization/76-declaration and initialization.html"
+                      title="Declaration And Initialization">Declaration And Initialization</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">77</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/77-existence of key value item/77-existence of key value item.html"
+                      title="Existence Of Key Value Item">Existence Of Key Value Item</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">78</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/78-the for range construct/78-the for range construct.html"
+                      title="The For Range Construct">The For Range Construct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">79</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/79-challenge map the days/79-challenge map the days.html"
+                      title="Challenge Map The Days">Challenge Map The Days</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">80</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/80-solution review map the days/80-solution review map the days.html"
+                      title="Solution Review Map The Days">Solution Review Map The Days</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">81</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/81-a slice of maps/81-a slice of maps.html"
+                      title="A Slice Of Maps">A Slice Of Maps</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">82</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/82-sorting and inverting a map/82-sorting and inverting a map.html"
+                      title="Sorting And Inverting A Map">Sorting And Inverting A Map</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">83</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/83-quiz deduce the outputs/83-quiz deduce the outputs.html"
+                      title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">84</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/84-overview of the standard library/84-overview of the standard library.html"
+                      title="Overview Of The Standard Library">Overview Of The Standard Library</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">85</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/85-challenge construct a double linked list/85-challenge construct a double linked list.html"
+                      title="Challenge Construct A Double Linked List">Challenge Construct A Double Linked List</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">86</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/86-solution review construct a double linked list/86-solution review construct a double linked list.html"
+                      title="Solution Review Construct A Double Linked List">Solution Review Construct A Double Linked List</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">87</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/87-the regexp package/87-the regexp package.html"
+                      title="The Regexp Package">The Regexp Package</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">88</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/88-locking and the sync package/88-locking and the sync package.html"
+                      title="Locking And The Sync Package">Locking And The Sync Package</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">89</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/89-accurate computations and the big package/89-accurate computations and the big package.html"
+                      title="Accurate Computations And The Big Package">Accurate Computations And The Big Package</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">90</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/90-custom packages and visibility/90-custom packages and visibility.html"
+                      title="Custom Packages And Visibility">Custom Packages And Visibility</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">91</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/91-documenting your packages/91-documenting your packages.html"
+                      title="Documenting Your Packages">Documenting Your Packages</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">92</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/92-custom packages folder structure go install and go test/92-custom packages folder structure go install and go test.html"
+                      title="Custom Packages Folder Structure Go Install And Go Test">Custom Packages Folder Structure Go Install And Go Test</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">93</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/93-using git for distribution/93-using git for distribution.html"
+                      title="Using Git For Distribution">Using Git For Distribution</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">94</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/94-external packages projects and libraries/94-external packages projects and libraries.html"
+                      title="External Packages Projects And Libraries">External Packages Projects And Libraries</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">95</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/95-installing external packages/95-installing external packages.html"
+                      title="Installing External Packages">Installing External Packages</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">96</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/96-introduction to struct/96-introduction to struct.html"
+                      title="Introduction To Struct">Introduction To Struct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">97</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/97-advanced structs concepts/97-advanced structs concepts.html"
+                      title="Advanced Structs Concepts">Advanced Structs Concepts</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">98</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/98-factory method/98-factory method.html"
+                      title="Factory Method">Factory Method</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">99</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/99-structs with tags/99-structs with tags.html"
+                      title="Structs With Tags">Structs With Tags</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">100</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/100-anonymous fields and embedded structs/100-anonymous fields and embedded structs.html"
+                      title="Anonymous Fields And Embedded Structs">Anonymous Fields And Embedded Structs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">101</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/101-challenge anonymous struct/101-challenge anonymous struct.html"
+                      title="Challenge Anonymous Struct">Challenge Anonymous Struct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">102</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/102-solution review anonymous struct/102-solution review anonymous struct.html"
+                      title="Solution Review Anonymous Struct">Solution Review Anonymous Struct</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">103</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/103-introduction to methods/103-introduction to methods.html"
+                      title="Introduction To Methods">Introduction To Methods</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">104</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/104-methods versus functions/104-methods versus functions.html"
+                      title="Methods Versus Functions">Methods Versus Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">105</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/105-challenge coordinates of a point/105-challenge coordinates of a point.html"
+                      title="Challenge Coordinates Of A Point">Challenge Coordinates Of A Point</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">106</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/106-solution review coordinates of a point/106-solution review coordinates of a point.html"
+                      title="Solution Review Coordinates Of A Point">Solution Review Coordinates Of A Point</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">107</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/107-challenge make a rectangle/107-challenge make a rectangle.html"
+                      title="Challenge Make A Rectangle">Challenge Make A Rectangle</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">108</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/108-solution review make a rectangle/108-solution review make a rectangle.html"
+                      title="Solution Review Make A Rectangle">Solution Review Make A Rectangle</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">109</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/109-challenge decide employee salary/109-challenge decide employee salary.html"
+                      title="Challenge Decide Employee Salary">Challenge Decide Employee Salary</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">110</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/110-solution review decide employee salary/110-solution review decide employee salary.html"
+                      title="Solution Review Decide Employee Salary">Solution Review Decide Employee Salary</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">111</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/111-receivers and methods as pointers and values/111-receivers and methods as pointers and values.html"
+                      title="Receivers And Methods As Pointers And Values">Receivers And Methods As Pointers And Values</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">112</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/112-non exported fields/112-non exported fields.html"
+                      title="Non Exported Fields">Non Exported Fields</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">113</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/113-string method and format specifiers/113-string method and format specifiers.html"
+                      title="String Method And Format Specifiers">String Method And Format Specifiers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">114</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/114-methods on embedded types/114-methods on embedded types.html"
+                      title="Methods On Embedded Types">Methods On Embedded Types</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">115</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/115-multiple inheritance/115-multiple inheritance.html"
+                      title="Multiple Inheritance">Multiple Inheritance</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">116</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/116-challenge implement stack data structure/116-challenge implement stack data structure.html"
+                      title="Challenge Implement Stack Data Structure">Challenge Implement Stack Data Structure</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">117</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/117-solution review implement stack data structure/117-solution review implement stack data structure.html"
+                      title="Solution Review Implement Stack Data Structure">Solution Review Implement Stack Data Structure</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">118</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/118-garbage collection and setfinalizer/118-garbage collection and setfinalizer.html"
+                      title="Garbage Collection And Setfinalizer">Garbage Collection And Setfinalizer</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">119</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/119-quiz deduce the outputs/119-quiz deduce the outputs.html"
+                      title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">120</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/120-what is an interface/120-what is an interface.html"
+                      title="What Is An Interface">What Is An Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">121</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/121-challenge make a simple interface/121-challenge make a simple interface.html"
+                      title="Challenge Make A Simple Interface">Challenge Make A Simple Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">122</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/122-solution review make a simple interface/122-solution review make a simple interface.html"
+                      title="Solution Review Make A Simple Interface">Solution Review Make A Simple Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">123</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/123-embedded interface and type assertions/123-embedded interface and type assertions.html"
+                      title="Embedded Interface And Type Assertions">Embedded Interface And Type Assertions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">124</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/124-the type switch/124-the type switch.html"
+                      title="The Type Switch">The Type Switch</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">125</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/125-challenge advancing the simple interface/125-challenge advancing the simple interface.html"
+                      title="Challenge Advancing The Simple Interface">Challenge Advancing The Simple Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">126</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/126-solution review advancing the simple interface/126-solution review advancing the simple interface.html"
+                      title="Solution Review Advancing The Simple Interface">Solution Review Advancing The Simple Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">127</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/127-implementation of interfaces/127-implementation of interfaces.html"
+                      title="Implementation Of Interfaces">Implementation Of Interfaces</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">128</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/128-sorting with the sorter interface/128-sorting with the sorter interface.html"
+                      title="Sorting With The Sorter Interface">Sorting With The Sorter Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">129</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/129-challenge advancing the shapes analysis/129-challenge advancing the shapes analysis.html"
+                      title="Challenge Advancing The Shapes Analysis">Challenge Advancing The Shapes Analysis</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">130</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/130-solution review advancing the shapes analysis/130-solution review advancing the shapes analysis.html"
+                      title="Solution Review Advancing The Shapes Analysis">Solution Review Advancing The Shapes Analysis</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">131</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/131-challenge sort people with sorter interface/131-challenge sort people with sorter interface.html"
+                      title="Challenge Sort People With Sorter Interface">Challenge Sort People With Sorter Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">132</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/132-solution review sort people with sorter interface/132-solution review sort people with sorter interface.html"
+                      title="Solution Review Sort People With Sorter Interface">Solution Review Sort People With Sorter Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">133</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/133-reading and writing/133-reading and writing.html"
+                      title="Reading And Writing">Reading And Writing</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">134</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/134-empty interface/134-empty interface.html"
+                      title="Empty Interface">Empty Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">135</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/135-challenge implement miner interface/135-challenge implement miner interface.html"
+                      title="Challenge Implement Miner Interface">Challenge Implement Miner Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">136</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/136-solution review implement miner interface/136-solution review implement miner interface.html"
+                      title="Solution Review Implement Miner Interface">Solution Review Implement Miner Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">137</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/137-the reflect package/137-the reflect package.html"
+                      title="The Reflect Package">The Reflect Package</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">138</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/138-printf and reflection/138-printf and reflection.html"
+                      title="Printf And Reflection">Printf And Reflection</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">139</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/139-interfaces and dynamic typing/139-interfaces and dynamic typing.html"
+                      title="Interfaces And Dynamic Typing">Interfaces And Dynamic Typing</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">140</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/140-structs collections and higher order functions/140-structs collections and higher order functions.html"
+                      title="Structs Collections And Higher Order Functions">Structs Collections And Higher Order Functions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">141</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/141-challenge make a stack with variable internal types/141-challenge make a stack with variable internal types.html"
+                      title="Challenge Make A Stack With Variable Internal Types">Challenge Make A Stack With Variable Internal Types</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">142</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/142-solution review make a stack with variable internal types/142-solution review make a stack with variable internal types.html"
+                      title="Solution Review Make A Stack With Variable Internal Types">Solution Review Make A Stack With Variable Internal Types</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">143</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/143-the object orientation in go/143-the object orientation in go.html"
+                      title="The Object Orientation In Go">The Object Orientation In Go</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">144</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/144-quiz deduce the outputs/144-quiz deduce the outputs.html"
+                      title="Quiz Deduce The Outputs">Quiz Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">145</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/145-reading input from the user/145-reading input from the user.html"
+                      title="Reading Input From The User">Reading Input From The User</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">146</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/146-challenge analyzing input from keyboard/146-challenge analyzing input from keyboard.html"
+                      title="Challenge Analyzing Input From Keyboard">Challenge Analyzing Input From Keyboard</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">147</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/147-solution review analyzing input from keyboard/147-solution review analyzing input from keyboard.html"
+                      title="Solution Review Analyzing Input From Keyboard">Solution Review Analyzing Input From Keyboard</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">148</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/148-reading from a file/148-reading from a file.html"
+                      title="Reading From A File">Reading From A File</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">149</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/149-writing to a file/149-writing to a file.html"
+                      title="Writing To A File">Writing To A File</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">150</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/150-challenge read csv file/150-challenge read csv file.html"
+                      title="Challenge Read Csv File">Challenge Read Csv File</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">151</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/151-solution review read csv file/151-solution review read csv file.html"
+                      title="Solution Review Read Csv File">Solution Review Read Csv File</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">152</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/152-challenge writing to a wiki page/152-challenge writing to a wiki page.html"
+                      title="Challenge Writing To A Wiki Page">Challenge Writing To A Wiki Page</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">153</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/153-solution review writing to a wiki page/153-solution review writing to a wiki page.html"
+                      title="Solution Review Writing To A Wiki Page">Solution Review Writing To A Wiki Page</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">154</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/154-copying files/154-copying files.html"
+                      title="Copying Files">Copying Files</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">155</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/155-reading arguments from the command line/155-reading arguments from the command line.html"
+                      title="Reading Arguments From The Command Line">Reading Arguments From The Command Line</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">156</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/156-reading files with a buffer/156-reading files with a buffer.html"
+                      title="Reading Files With A Buffer">Reading Files With A Buffer</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">157</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/157-reading and writing files with slices/157-reading and writing files with slices.html"
+                      title="Reading And Writing Files With Slices">Reading And Writing Files With Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">158</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/158-scanning inputs/158-scanning inputs.html"
+                      title="Scanning Inputs">Scanning Inputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">159</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/159-a practical example of interfaces/159-a practical example of interfaces.html"
+                      title="A Practical Example Of Interfaces">A Practical Example Of Interfaces</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">160</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/160-the json data format/160-the json data format.html"
+                      title="The Json Data Format">The Json Data Format</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">161</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/161-decoding with json/161-decoding with json.html"
+                      title="Decoding With Json">Decoding With Json</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">162</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/162-the xml data format/162-the xml data format.html"
+                      title="The Xml Data Format">The Xml Data Format</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">163</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/163-data transport through gob/163-data transport through gob.html"
+                      title="Data Transport Through Gob">Data Transport Through Gob</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">164</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/164-challenge decode the contents/164-challenge decode the contents.html"
+                      title="Challenge Decode The Contents">Challenge Decode The Contents</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">165</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/165-solution review decode the contents/165-solution review decode the contents.html"
+                      title="Solution Review Decode The Contents">Solution Review Decode The Contents</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">166</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/166-cryptography with go/166-cryptography with go.html"
+                      title="Cryptography With Go">Cryptography With Go</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">167</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/167-exercise deduce the outputs/167-exercise deduce the outputs.html"
+                      title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">168</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/168-error handling/168-error handling.html"
+                      title="Error Handling">Error Handling</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">169</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/169-run time exceptions and panic/169-run time exceptions and panic.html"
+                      title="Run Time Exceptions And Panic">Run Time Exceptions And Panic</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">170</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/170-recover/170-recover.html"
+                      title="Recover">Recover</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">171</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/171-error handling and panicking in a user defined package/171-error handling and panicking in a user defined package.html"
+                      title="Error Handling And Panicking In A User Defined Package">Error Handling And Panicking In A User Defined Package</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">172</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/172-error handling scheme with closures/172-error handling scheme with closures.html"
+                      title="Error Handling Scheme With Closures">Error Handling Scheme With Closures</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">173</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/173-challenge generate panic from division by 0/173-challenge generate panic from division by 0.html"
+                      title="Challenge Generate Panic From Division By 0">Challenge Generate Panic From Division By 0</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">174</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/174-solution review generate panic from division by 0/174-solution review generate panic from division by 0.html"
+                      title="Solution Review Generate Panic From Division By 0">Solution Review Generate Panic From Division By 0</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">175</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/175-starting an external command or program/175-starting an external command or program.html"
+                      title="Starting An External Command Or Program">Starting An External Command Or Program</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">176</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/176-testing and benchmarking in go/176-testing and benchmarking in go.html"
+                      title="Testing And Benchmarking In Go">Testing And Benchmarking In Go</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">177</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/177-testing a concrete example/177-testing a concrete example.html"
+                      title="Testing A Concrete Example">Testing A Concrete Example</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">178</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/178-using table driven tests/178-using table driven tests.html"
+                      title="Using Table Driven Tests">Using Table Driven Tests</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">179</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/179-investigating performance/179-investigating performance.html"
+                      title="Investigating Performance">Investigating Performance</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">180</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/180-exercise deduce the outputs/180-exercise deduce the outputs.html"
+                      title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">181</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/181-handling concurrency and parallelism with go/181-handling concurrency and parallelism with go.html"
+                      title="Handling Concurrency And Parallelism With Go">Handling Concurrency And Parallelism With Go</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">182</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/182-implementing goroutines/182-implementing goroutines.html"
+                      title="Implementing Goroutines">Implementing Goroutines</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">183</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/183-introduction to channels/183-introduction to channels.html"
+                      title="Introduction To Channels">Introduction To Channels</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">184</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/184-synchronous and asynchronous communication/184-synchronous and asynchronous communication.html"
+                      title="Synchronous And Asynchronous Communication">Synchronous And Asynchronous Communication</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">185</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/185-challenge demonstrate the blocking nature/185-challenge demonstrate the blocking nature.html"
+                      title="Challenge Demonstrate The Blocking Nature">Challenge Demonstrate The Blocking Nature</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">186</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/186-solution review demonstrate the blocking nature/186-solution review demonstrate the blocking nature.html"
+                      title="Solution Review Demonstrate The Blocking Nature">Solution Review Demonstrate The Blocking Nature</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">187</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/187-semaphore pattern/187-semaphore pattern.html"
+                      title="Semaphore Pattern">Semaphore Pattern</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">188</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/188-channel factory and producer consumer pattern/188-channel factory and producer consumer pattern.html"
+                      title="Channel Factory And Producer Consumer Pattern">Channel Factory And Producer Consumer Pattern</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">189</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/189-challenge summing the integers/189-challenge summing the integers.html"
+                      title="Challenge Summing The Integers">Challenge Summing The Integers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">190</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/190-solution review summing the integers/190-solution review summing the integers.html"
+                      title="Solution Review Summing The Integers">Solution Review Summing The Integers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">191</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/191-channel directionality/191-channel directionality.html"
+                      title="Channel Directionality">Channel Directionality</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">192</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/192-synchronization of goroutines/192-synchronization of goroutines.html"
+                      title="Synchronization Of Goroutines">Synchronization Of Goroutines</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">193</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/193-switching between goroutines/193-switching between goroutines.html"
+                      title="Switching Between Goroutines">Switching Between Goroutines</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">194</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/194-challenge devise random bit generator/194-challenge devise random bit generator.html"
+                      title="Challenge Devise Random Bit Generator">Challenge Devise Random Bit Generator</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">195</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/195-solution review devise random bit generator/195-solution review devise random bit generator.html"
+                      title="Solution Review Devise Random Bit Generator">Solution Review Devise Random Bit Generator</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">196</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/196-challenge map polar points to cartesian points/196-challenge map polar points to cartesian points.html"
+                      title="Challenge Map Polar Points To Cartesian Points">Challenge Map Polar Points To Cartesian Points</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">197</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/197-solution review map polar points to cartesian points/197-solution review map polar points to cartesian points.html"
+                      title="Solution Review Map Polar Points To Cartesian Points">Solution Review Map Polar Points To Cartesian Points</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">198</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/198-channels timeouts and tickers/198-channels timeouts and tickers.html"
+                      title="Channels Timeouts And Tickers">Channels Timeouts And Tickers</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">199</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/199-using recover with goroutines/199-using recover with goroutines.html"
+                      title="Using Recover With Goroutines">Using Recover With Goroutines</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">200</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/200-tasks and worker processes/200-tasks and worker processes.html"
+                      title="Tasks And Worker Processes">Tasks And Worker Processes</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">201</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/201-implementing a lazy generator/201-implementing a lazy generator.html"
+                      title="Implementing A Lazy Generator">Implementing A Lazy Generator</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">202</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/202-anonymous closure/202-anonymous closure.html"
+                      title="Anonymous Closure">Anonymous Closure</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">203</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/203-implementing futures/203-implementing futures.html"
+                      title="Implementing Futures">Implementing Futures</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">204</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/204-multiplexing/204-multiplexing.html"
+                      title="Multiplexing">Multiplexing</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">205</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/205-limiting the number of requests/205-limiting the number of requests.html"
+                      title="Limiting The Number Of Requests">Limiting The Number Of Requests</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">206</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/206-chaining and parallelizing computation/206-chaining and parallelizing computation.html"
+                      title="Chaining And Parallelizing Computation">Chaining And Parallelizing Computation</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">207</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/207-the leaky bucket algorithm/207-the leaky bucket algorithm.html"
+                      title="The Leaky Bucket Algorithm">The Leaky Bucket Algorithm</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">208</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/208-benchmarking accessing and listening/208-benchmarking accessing and listening.html"
+                      title="Benchmarking Accessing And Listening">Benchmarking Accessing And Listening</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">209</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/209-exercise deduce the outputs/209-exercise deduce the outputs.html"
+                      title="Exercise Deduce The Outputs">Exercise Deduce The Outputs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">210</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/210-a tcp server/210-a tcp server.html"
+                      title="A Tcp Server">A Tcp Server</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">211</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/211-a simple web server/211-a simple web server.html"
+                      title="A Simple Web Server">A Simple Web Server</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">212</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/212-polling websites and reading web page/212-polling websites and reading web page.html"
+                      title="Polling Websites And Reading Web Page">Polling Websites And Reading Web Page</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">213</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/213-writing a simple web application/213-writing a simple web application.html"
+                      title="Writing A Simple Web Application">Writing A Simple Web Application</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">214</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/214-challenge web application for statistics/214-challenge web application for statistics.html"
+                      title="Challenge Web Application For Statistics">Challenge Web Application For Statistics</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">215</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/215-solution review web application for statistics/215-solution review web application for statistics.html"
+                      title="Solution Review Web Application For Statistics">Solution Review Web Application For Statistics</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">216</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/216-making a web application robust/216-making a web application robust.html"
+                      title="Making A Web Application Robust">Making A Web Application Robust</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">217</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/217-writing web application with templates/217-writing web application with templates.html"
+                      title="Writing Web Application With Templates">Writing Web Application With Templates</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">218</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/218-exploring the template package/218-exploring the template package.html"
+                      title="Exploring The Template Package">Exploring The Template Package</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">219</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/219-challenge web application for serving guests/219-challenge web application for serving guests.html"
+                      title="Challenge Web Application For Serving Guests">Challenge Web Application For Serving Guests</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">220</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/220-solution review web application for serving guests/220-solution review web application for serving guests.html"
+                      title="Solution Review Web Application For Serving Guests">Solution Review Web Application For Serving Guests</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">221</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/221-an elaborate web server/221-an elaborate web server.html"
+                      title="An Elaborate Web Server">An Elaborate Web Server</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">222</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/222-remote procedure calls with rpc/222-remote procedure calls with rpc.html"
+                      title="Remote Procedure Calls With Rpc">Remote Procedure Calls With Rpc</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">223</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/223-sending mails with smtp/223-sending mails with smtp.html"
+                      title="Sending Mails With Smtp">Sending Mails With Smtp</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">224</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/224-go in the cloud/224-go in the cloud.html"
+                      title="Go In The Cloud">Go In The Cloud</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">225</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/225-regular mistakes and suggestions/225-regular mistakes and suggestions.html"
+                      title="Regular Mistakes And Suggestions">Regular Mistakes And Suggestions</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">226</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/226-highlights from the previous chapters/226-highlights from the previous chapters.html"
+                      title="Highlights From The Previous Chapters">Highlights From The Previous Chapters</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">227</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/227-the comma ok pattern/227-the comma ok pattern.html"
+                      title="The Comma Ok Pattern">The Comma Ok Pattern</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">228</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/228-the defer pattern/228-the defer pattern.html"
+                      title="The Defer Pattern">The Defer Pattern</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">229</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/229-visibility and operator patterns/229-visibility and operator patterns.html"
+                      title="Visibility And Operator Patterns">Visibility And Operator Patterns</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">230</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/230-strings arrays and slices/230-strings arrays and slices.html"
+                      title="Strings Arrays And Slices">Strings Arrays And Slices</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">231</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/231-structs interfaces and maps/231-structs interfaces and maps.html"
+                      title="Structs Interfaces And Maps">Structs Interfaces And Maps</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">232</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/232-functions and files/232-functions and files.html"
+                      title="Functions And Files">Functions And Files</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">233</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/233-goroutines and networking/233-goroutines and networking.html"
+                      title="Goroutines And Networking">Goroutines And Networking</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">234</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/234-suggestions and considerations/234-suggestions and considerations.html"
+                      title="Suggestions And Considerations">Suggestions And Considerations</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">235</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/235-introduction/235-introduction.html"
+                      title="Introduction">Introduction</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">236</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/236-setting up the structure of application/236-setting up the structure of application.html"
+                      title="Setting Up The Structure Of Application">Setting Up The Structure Of Application</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">237</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/237-our user interface/237-our user interface.html"
+                      title="Our User Interface">Our User Interface</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">238</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/238-persistent storage with gob/238-persistent storage with gob.html"
+                      title="Persistent Storage With Gob">Persistent Storage With Gob</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">239</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/239-using goroutines for performance/239-using goroutines for performance.html"
+                      title="Using Goroutines For Performance">Using Goroutines For Performance</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">240</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/240-persistent storage with json/240-persistent storage with json.html"
+                      title="Persistent Storage With Json">Persistent Storage With Json</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">241</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/241-enhancements/241-enhancements.html"
+                      title="Enhancements">Enhancements</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">242</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/242-platforms and architectures/242-platforms and architectures.html"
+                      title="Platforms And Architectures">Platforms And Architectures</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">243</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/243-installing go and the go tools chain in binary format/243-installing go and the go tools chain in binary format.html"
+                      title="Installing Go And The Go Tools Chain In Binary Format">Installing Go And The Go Tools Chain In Binary Format</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">244</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/244-installing go from source/244-installing go from source.html"
+                      title="Installing Go From Source">Installing Go From Source</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">245</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/245-go work environment/245-go work environment.html"
+                      title="Go Work Environment">Go Work Environment</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">246</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/246-basic requirements for a go environment/246-basic requirements for a go environment.html"
+                      title="Basic Requirements For A Go Environment">Basic Requirements For A Go Environment</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">247</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/247-editors and integrated development environments/247-editors and integrated development environments.html"
+                      title="Editors And Integrated Development Environments">Editors And Integrated Development Environments</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">248</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/248-debugging/248-debugging.html"
+                      title="Debugging">Debugging</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">249</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/249-formatting the code/249-formatting the code.html"
+                      title="Formatting The Code">Formatting The Code</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">250</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/250-building and running go programs/250-building and running go programs.html"
+                      title="Building And Running Go Programs">Building And Running Go Programs</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">251</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/251-searching for help and documenting the code/251-searching for help and documenting the code.html"
+                      title="Searching For Help And Documenting The Code">Searching For Help And Documenting The Code</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">252</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/252-tools and go s performance/252-tools and go s performance.html"
+                      title="Tools And Go S Performance">Tools And Go S Performance</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">253</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/253-interaction with c and cplusplus/253-interaction with c and cplusplus.html"
+                      title="Interaction With C And Cplusplus">Interaction With C And Cplusplus</a>
+                  </strong>
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td align="center">254</td>
+                <td align="center">
+                  <strong>
+                    <a href="/priceless-negotiation/254-helpful resources/254-helpful resources.html"
+                      title="Helpful Resources">Helpful Resources</a>
+                  </strong>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+  <!-- UPDATE: Make sure to update NAME, REPO, and NAMESPACE below-->
+  <script>
+
+  </script>
+  <script src="/priceless-negotiation/static/docsify.min.js"></script>
+  <script src="/priceless-negotiation/static/index.js"></script>
+  <script src="/priceless-negotiation/static/emoji.min.js"></script>
+  <script src="/priceless-negotiation/static/external-script.min.js"></script>
+  <script src="/priceless-negotiation/static/docsify-copy-code@2"></script>
+  <script src="/priceless-negotiation/static/docsify-tabs@1"></script>
+  <script src="/priceless-negotiation/static/docsify-plugin-flexible-alerts"></script>
+  <script src="/priceless-negotiation/static/prism-bash.min.js"></script>
+  <script src="/priceless-negotiation/static/prism-handlebars.min.js"></script>
+  <script src="/priceless-negotiation/static/prism-javascript.min.js"></script>
+  <script src="/priceless-negotiation/static/prism-json.min.js"></script>
+  <script src="/priceless-negotiation/static/prism-markdown.min.js"></script>
+  <script src="/priceless-negotiation/static/index.min.js" type="text/javascript">
+  </script>
+</body>
+
+</html>

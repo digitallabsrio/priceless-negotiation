@@ -1,0 +1,32 @@
+package main
+
+type Square struct {
+	side float32
+}
+
+type Triangle struct {	// implement this struct
+	
+}
+
+type AreaInterface interface {
+	Area() float32
+}
+
+type PeriInterface interface { // implement this interface 
+	
+}
+func main() {
+	
+}
+
+func (sq *Square) Area() float32 {
+	return sq.side * sq.side
+}
+
+func (sq *Square) Perimeter() float32 { // implement method called on square to calculate its perimeter
+	return 0
+}
+
+func (tr *Triangle) Area() float32 { // implement method called on triangle to calculate its area
+	return 0
+}

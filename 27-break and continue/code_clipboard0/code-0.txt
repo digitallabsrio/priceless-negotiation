@@ -1,0 +1,14 @@
+package main
+import "fmt"
+
+func main() {
+    for i:=0; i<3; i++ {    // outer loop
+        for j:=0; j<10; j++ {   // inner loop
+            if j>5 {
+                break                   // breaking inner loop
+            }
+            fmt.Printf("%d",j)
+        }
+        fmt.Printf(" ")
+    }
+}

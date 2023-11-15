@@ -1,0 +1,16 @@
+package main
+
+func badCall() {
+  
+}
+
+func test() {
+   defer func() { 
+
+    }()
+    badCall()
+}
+
+func main() {
+   
+}

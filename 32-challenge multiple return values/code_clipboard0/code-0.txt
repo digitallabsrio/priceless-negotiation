@@ -1,0 +1,9 @@
+package main
+import "fmt"
+import "strconv"
+import "encoding/json"
+
+func SumProductDiff(i, j int)(s int, p int, d int) {   // named version
+    
+    return
+}

@@ -1,0 +1,9 @@
+package main
+import "fmt"
+import "strconv"
+import "encoding/json"
+
+func Factorial(n uint64) (fac uint64) {
+	
+	return
+}

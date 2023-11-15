@@ -1,0 +1,7 @@
+package main
+import "fmt"
+
+func main(){
+    var c1 complex64 = 5 + 10i        // Declaring complex num (real +imaginary(¡))
+    fmt.Printf("The value is: %v", c1)
+}

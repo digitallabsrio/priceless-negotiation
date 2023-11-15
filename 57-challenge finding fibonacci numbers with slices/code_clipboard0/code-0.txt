@@ -1,0 +1,9 @@
+package main
+import "fmt"
+import "strconv"
+import "encoding/json"
+
+func fibarray(term int) []int {
+	
+	return nil
+}

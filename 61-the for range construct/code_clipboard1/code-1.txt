@@ -1,0 +1,18 @@
+package main
+import (
+"fmt"
+"strings"
+)
+
+func main() {
+  seasons := []string{"Spring","Summer","Autumn","Winter"}
+  for ix, season := range seasons { // printing seasons
+    fmt.Printf("Season %d is: %s \n", ix, season)
+  }
+  for ix := range seasons {
+    seasons[ix] = strings.ToUpper(seasons[ix])  // modifying the seasons
+  }
+  for ix, season := range seasons {
+    fmt.Printf("Season %d is: %s \n", ix, season) // printing modified seasons
+  }
+}

@@ -1,0 +1,28 @@
+package main
+
+type Simpler interface {  // interface implementing functions called on struct Simple
+	
+}
+
+type Simple struct {    
+	
+}
+
+func (p *Simple) Get() int {  
+	
+    return 0
+}
+
+func (p *Simple) Set(u int) {
+	
+    return
+}
+
+func fI(it Simpler) int {     // function calling both methods through interface
+	
+    return 0
+}
+
+func main() {
+
+}

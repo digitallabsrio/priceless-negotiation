@@ -1,0 +1,7 @@
+package main
+
+func main(){
+    const i = 5
+    ptr1 := &i //error: cannot take the address of i
+    ptr2 := &10 //error: cannot take the address of 10
+}

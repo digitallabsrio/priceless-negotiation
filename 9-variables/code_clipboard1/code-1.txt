@@ -1,0 +1,9 @@
+package main
+import "fmt"
+
+func main(){
+    var number int = 5          // Declaring and initializing  an integer variable 
+    fmt.Println(number)          // Printing its value
+    var decision bool = true     // Declaring a initializing a boolean variable
+    fmt.Println(decision)        // Printing its value
+}

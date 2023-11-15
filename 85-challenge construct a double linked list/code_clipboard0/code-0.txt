@@ -1,0 +1,12 @@
+package main
+import "fmt"
+import "strconv"
+import "encoding/json"
+
+import "container/list"
+
+func insertListElements(n int)(*list.List){   // add elements in list from 1 to n
+  lst := list.New()
+
+  return lst
+}

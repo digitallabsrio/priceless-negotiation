@@ -1,0 +1,27 @@
+package main
+import "fmt"
+import "strings"
+import "strconv"
+import "encoding/json"
+
+const LIMIT = 4 // DONOT CHANGE IT!
+
+type Stack struct {
+	ix   int // first free position, so data[ix] == 0
+	data [LIMIT]int
+}
+
+func (st *Stack) Push(n int) {
+	
+	return 
+}
+
+func (st *Stack) Pop() int {
+	
+	return 0
+}
+
+func (st Stack) String() string {
+	
+	return ""
+}
